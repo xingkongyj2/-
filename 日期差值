@@ -1,3 +1,5 @@
+//http://codeup.cn/problem.php?id=1928&csrf=7cP70yye6N56Ph9U93xbamoZMNzNpHBa
+
 #include <stdio.h>
 
 int mouth[13][2]={{0,0},{31,31},{28,29},{31,31},{30,30},{31,31},{30,30},
