@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int mouth[13][2]={{0,0},{31,31},{28,29},{31,31},{30,30},{31,31},{30,30},
+    {31,31},{31,31},{30,30},{31,31},{30,30},{31,31}};
+
+bool isLeap(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+int main()
+{
+    int early,late;
+    int y1,m1,d1,y2,m2,d2;
+    
+    
+    while (scanf("%d %d",&early,&late)!=EOF)
+    {
+        int sum=1;
+        if (early>late)
+        {
+            int temp=early;
+            early=late;
+            late=temp;
+        }
+        
+        d1=early%100;m1=(early/100)%100;y1=early/10000;
+        d2=late%100;m2=(late/100)%100;y2=late/10000;
+        while (y1<y2 || m1<m2 || d1<d2)
+        {
+            d1++;
+            if(d1>mouth[m1][isLeap(y1)])
+            {
+                m1++;
+                d1=1;
+            }
+            if(m1==13)
+            {
+                y1++;
+                m1=1;
+            }
+            
+            sum++;
+        }
+        printf("%d\n",sum);
+    }
+    
+    
+    return 0;
+}
