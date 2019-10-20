@@ -1,0 +1,31 @@
+//http://codeup.cn/problem.php?cid=100000578&pid=2
+#include <stdio.h>
+ 
+int mouth[13][2]={{0,0},{31,31},{28,29},{31,31},{30,30},{31,31},
+                    {30,30},{31,31},{31,31},{30,30},{31,31},{30,30},{31,31}};
+ 
+bool isLeap(int year)
+{
+    return (year % 4==0 && year % 100 !=0 )||(year % 400 == 0);
+}
+ 
+int main()
+{
+        int yy,sum;
+     
+        while (scanf("%d %d",&yy,&sum)!=EOF)
+        {
+            bool flag=isLeap(yy);
+            int mm=1;
+             
+            while (sum>mouth[mm][flag])
+            {
+                sum-=mouth[mm][flag];
+                mm++;
+            }
+             
+            printf("%04d-%02d-%02d\n",yy,mm,sum);
+        }
+ 
+    return 0;
+}
