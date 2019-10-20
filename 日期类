@@ -1,0 +1,31 @@
+//http://codeup.cn/problem.php?cid=100000578&pid=3
+#include <stdio.h>
+ 
+int mouth[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+ 
+ 
+int main()
+{
+    int m;
+    scanf("%d",&m);
+    while (m--)
+    {
+        int yy,mm,dd;
+        scanf("%d %d %d",&yy,&mm,&dd);
+         
+        dd++;
+        if(dd>mouth[mm])
+        {
+            mm++;
+            dd=1;
+        }
+        if(mm>=13)
+        {
+            yy++;
+            mm=1;
+        }
+         printf("%d-%02d-%02d\n",yy,mm,dd);
+    }
+     
+    return 0;
+}
