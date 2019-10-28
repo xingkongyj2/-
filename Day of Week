@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <string.h>
+
+char mouth[13][10]={"","January","February","March","April","May","June",
+"July","August","September","October","November","December"};
+
+char mouthDay[13][2]={{0,0},{31,31},{28,29},{31,31},{30,30},{31,31},{30,30},
+                    {31,31},{31,31},{30,30},{31,31},{30,30},{31,31}};
+
+char week[8][10]={"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+
+bool isLeap(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0)||(year % 400 == 0);
+}
+
+int main()
+{
+    int yy,mm,dd;
+    char str[20];
+    
+    while (scanf("%d %s %d",&dd,str,&yy)!=EOF)
+    {
+        int sum=0;
+        for (int i=1; i<13 ; i++)
+        {
+            if(!strcmp(mouth[i],str))
+            {
+                mm=i;break;
+            }
+        }
+        
+        int date=yy*10000+mm*100+dd;
+        
+        if(date<20191020)
+        {
+            while(yy<2019 || mm<10 || dd<20)
+            {
+                dd++;sum++;
+                if(dd>mouthDay[mm][isLeap(yy)])
+                {
+                    mm++;dd=1;
+                }
+                if(mm>=13)
+                {
+                    yy++;mm=1;
+                }
+            }
+            sum=7-sum%7;
+        }
+        else
+        {
+            while(yy>2019 || mm>10 || dd>20)
+            {
+                dd--;sum++;
+                if(dd<=0)
+                {
+                    mm--;
+                    if(mm<=0)
+                    {
+                        yy--;mm=12;
+                    }
+                    dd=mouthDay[mm][isLeap(yy)];
+                }
+            }
+            sum=(7+sum%7)%7;
+        }
+        for (int i=1; i<8; i++)
+        {
+            if(i==sum)
+            {
+                printf("%s\n",week[i]);break;
+            }
+        }
+    }
+    return 0;
+}
