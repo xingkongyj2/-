@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+struct Students{
+    int ID;
+    char name[10];
+    int score;
+}students[100003];
+
+bool compare(Students s1,Students s2)
+{
+    return s1.ID<s2.ID;
+}
+
+//当若干学生具有相同姓名或者相同成绩时，则按他们的学号递增排序。这句话是对2，3情况的补充
+bool compare2(Students s1,Students s2) //按姓名的非递减字典序排序
+{
+    string str1=s1.name;
+    string str2=s2.name;
+    if(str1==str2)
+        return s1.ID<s2.ID;
+    return str1<str2;           //return str1<=tr2;错误写法
+}
+
+bool compare3(Students s1,Students s2) //按成绩的非递减排序。
+{
+    if (s1.score==s2.score)
+    {
+        return s1.ID<s2.ID;
+    }
+    return s1.score<s2.score;
+}
+
+int main()
+{
+    int N,C;
+    int sum=0;
+    while (1)
+    {
+        sum++;
+        scanf("%d %d",&N,&C);
+        if (N==0)
+            break;
+        for (int i=0; i<N;i++)
+            scanf("%d %s %d",&students[i].ID,students[i].name,&students[i].score);
+
+        if(C==1)
+            sort(students, students+N, compare);
+        else if(C==2)
+            sort(students, students+N, compare2);
+        else
+            sort(students, students+N, compare3);
+        printf("Case %d:\n",sum);
+        for (int i=0; i<N;i++)
+            printf("%06d %s %d\n",students[i].ID,students[i].name,students[i].score);
+    }
+    
+    return 0;
+}
