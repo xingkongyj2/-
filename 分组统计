@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int m;
+    scanf("%d",&m);
+    while(m--)
+    {
+        int n;
+        int tmp;
+        int num[101],flag[1002]={0},set[1002][1002]={0},flag2[1002]={0};
+        scanf("%d",&n);
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&num[i]);
+            flag[num[i]]=1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&tmp);
+            flag2[tmp]=1;
+            set[tmp][num[i]]+=1;
+        }
+        for(int i=0;i<1001;i++)
+        {
+            int sum=0;
+            if(flag2[i]!=1) continue; 
+            printf("%d={",i);
+            for(int j=0;j<1001;j++)
+            {
+                if(flag[j]==1)
+                {
+                    sum++;
+                    if(sum==1)
+                        printf("%d=%d",j,set[i][j]);
+                    else
+                        printf(",%d=%d",j,set[i][j]);
+                }
+                
+            }
+            printf("}\n");
+        }
+        
+    }
+    
+    return 0;
+}
