@@ -1,0 +1,40 @@
+- 非负说明有0
+- 注意数的范围
+
+#include <stdio.h>
+
+int main()
+{
+    while (1)
+    {
+        //任意10进制以内的进制转换
+        long long A,B;
+        long long x,y=0,product=1;    //y是转换为十进制后的值
+        int p=10;                //指定输入是几进制
+        int t;                  //指定输出是几进制
+        
+        scanf("%d",&t);
+        if(t==0) break;
+        scanf("%lld %lld",&A,&B);
+        
+        if(A==0 && B==0)
+        {
+            printf("0\n");
+            continue;
+        }
+        
+        y=A+B;
+
+        int target[1000],num=0;
+        while (y>0)
+        {
+            target[num++]=y%t;
+            
+            y=y/t;
+        }
+        for (int i=num-1; i>=0; i--)
+            printf("%d",target[i]);
+        printf("\n");
+    }
+    return 0;
+}
